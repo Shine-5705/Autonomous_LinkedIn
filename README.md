@@ -1,141 +1,184 @@
 # Autonomous_LinkedIn
 
-A Python-based automation tool that helps streamline your job application process on LinkedIn using Selenium WebDriver. This bot automatically fills out job applications using your resume data and custom filters.
+An automated tool built with Python/Node.js that helps streamline the job application process on LinkedIn by automatically filling out Easy Apply applications based on your resume data.
 
-## Features
+## 🌟 Features
 
-- Automated LinkedIn login
-- Custom job search with filters
-  - Location-based search
-  - Experience level filtering
-  - Work type filtering (Remote, On-site, Hybrid)
-  - Easy Apply filter
-- Intelligent form filling based on resume data
-- Automatic resume upload
-- Smart handling of various application forms
-  - Text inputs
+- Automated LinkedIn login and job search
+- Supports filtering jobs by:
+  - Easy Apply only
+  - Experience level
+  - Work type (Remote/Hybrid/On-site)
+- Smart form filling based on resume data
+- Handles various input types:
+  - Text fields
   - Select dropdowns
   - Radio buttons
   - Checkboxes
-  - Text areas
-- Fuzzy matching for accurate form field completion
-- Comprehensive logging system
-- Automatic handling of pop-ups and overlays
+  - File uploads (Resume)
+- Intelligent response generation for application questions
+- Automatic resume upload
+- Robust error handling and retry mechanisms
 
-## Prerequisites
+## 📋 Prerequisites
 
-- Python 3.7+
-- Chrome browser
-- Active LinkedIn account
-- Resume in PDF format
+- Python 3.7+ or Node.js 14+
+- Chrome browser installed
+- LinkedIn account
+- Updated resume file (PDF format recommended)
 
-## Installation
+## 🚀 Installation
 
-1. Clone this repository:
+### Python Version
+
+1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/Autonomous_LinkedIn.git
+git clone https://github.com/Shine-5705/Autonomous_LinkedIn.git
 cd Autonomous_LinkedIn
 ```
 
 2. Install required packages:
 ```bash
-pip install selenium webdriver_manager fuzzywuzzy python-Levenshtein
+pip install selenium webdriver-manager fuzzywuzzy python-Levenshtein logging
 ```
 
-## Configuration
+### Node.js Version
 
-1. Create a copy of your resume data in the following format:
+1. Clone the repository:
+```bash
+git clone https://github.com/Shine-5705/Autonomous_LinkedIn.git
+cd Autonomous_LinkedIn
+```
+
+2. Install dependencies:
+```bash
+npm install puppeteer fs path url fuzzysort openai
+```
+
+## ⚙️ Configuration
+
+1. Create a configuration object with your credentials and preferences:
+
+```javascript
+// For Node.js version
+const config = {
+    username: "your.email@example.com",
+    password: "your_password",
+    resumeData: {
+        "first name": "Your Name",
+        "last name": "Your Last Name",
+        "email": "your.email@example.com",
+        "phone": "1234567890",
+        "location": "City, Country",
+        "current title": "Your Title",
+        "years of experience": "X",
+        "education": "Your Degree",
+        "skills": "Skill1, Skill2, Skill3",
+        // Add more relevant fields
+    },
+    jobFilters: {
+        easy_apply: true,
+        experience_level: "Entry level", // Options: "Internship", "Entry level", "Associate", "Mid-Senior level", "Director", "Executive"
+        work_type: "Remote" // Options: "Remote", "On-site", "Hybrid"
+    },
+    resumePath: "/path/to/your/resume.pdf"
+};
+```
+
 ```python
+# For Python version
 resume_data = {
-    "first name": "Your First Name",
+    "first name": "Your Name",
     "last name": "Your Last Name",
     "email": "your.email@example.com",
-    "phone country code": "Your Country Code",
-    "mobile phone number": "Your Phone Number",
-    "city": "Your City",
-    "years of experience": "Your Experience",
-    "highest degree": "Your Degree",
-    "field of study": "Your Field",
-    "skills": "Your Skills",
-    "about me": "Your Description",
-    # ... add other relevant fields
+    # Add more fields similar to Node.js version
 }
-```
 
-2. Set up your job search filters:
-```python
 job_filters = {
     "easy_apply": True,
-    "experience_level": "Internship",  # Options: "Internship", "Entry level", "Associate", "Mid-Senior level", "Director", "Executive"
-    "work_type": "Remote"  # Options: "Remote", "On-site", "Hybrid"
+    "experience_level": "Entry level",
+    "work_type": "Remote"
 }
+
+resume_path = "/path/to/your/resume.pdf"
 ```
 
-## Usage
+## 🎯 Usage
 
-1. Update the main script with your credentials and preferences:
+### Python Version
+
 ```python
-username = "your_email@example.com"
-password = "your_password"
-job_title = "Your Target Job Title"
-location = "Your Target Location"
-resume_path = "path/to/your/resume.pdf"
+from linkedin_bot import LinkedInLoginBot
+
+bot = LinkedInLoginBot(
+    username="your.email@example.com",
+    password="your_password",
+    resume_data=resume_data,
+    job_filters=job_filters,
+    resume_path=resume_path
+)
+
+bot.run_job_application_process("Job Title", "Location")
 ```
 
-2. Run the script:
-```bash
-python linkedin_bot.py
+### Node.js Version
+
+```javascript
+const { LinkedInLoginBot } = require('./linkedin_bot');
+
+const bot = new LinkedInLoginBot(
+    config.username,
+    config.password,
+    config.resumeData,
+    config.jobFilters,
+    config.resumePath
+);
+
+bot.runJobApplicationProcess("Job Title", "Location");
 ```
 
-## Safety Features
+## 📝 Important Notes
 
-- Built-in delays to prevent detection
-- Random timing between actions
-- Browser automation hiding
-- Popup and overlay handling
-- Error recovery mechanisms
-- Comprehensive logging
+1. **Resume Format**: Ensure your resume is in a supported format (PDF recommended) and under 2MB.
+2. **LinkedIn Rate Limits**: Be mindful of LinkedIn's rate limits and terms of service.
+3. **Data Privacy**: Keep your credentials and personal information secure.
+4. **Browser Windows**: Don't minimize the browser window while the bot is running.
+5. **Application Review**: Always review the applications being submitted by the bot.
 
-## Logging
+## 🔒 Security Considerations
 
-The bot includes detailed logging of all actions and errors. Logs include:
-- Login attempts
-- Job search results
-- Form filling progress
-- Application submissions
-- Errors and exceptions
+- Never commit your credentials or personal information to version control
+- Use environment variables for sensitive information
+- Review each application before final submission
+- Monitor the bot's activity to ensure it's working as intended
 
-## Best Practices
+## 🐛 Troubleshooting
 
-1. **Rate Limiting**: Don't apply to too many jobs too quickly to avoid account restrictions
-2. **Resume Format**: Ensure your resume is in PDF format
-3. **Data Accuracy**: Keep your resume_data dictionary up-to-date
-4. **Monitoring**: Regular monitoring of the bot's operation is recommended
+Common issues and solutions:
 
-## Known Limitations
+1. **Login Failed**
+   - Check your credentials
+   - Ensure you're not using 2FA
+   - Try logging in manually first
 
-- Only works with "Easy Apply" applications
-- Some complex application forms may require manual intervention
-- LinkedIn's interface changes may require updates to selectors
-- Cannot handle CAPTCHA challenges
+2. **Resume Upload Failed**
+   - Verify the resume path is correct
+   - Check file size (must be under 2MB)
+   - Ensure file format is supported
 
-## Contributing
+3. **Form Filling Issues**
+   - Update resume_data with more comprehensive information
+   - Check console logs for specific field errors
+   - Verify field selectors are current
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 🤝 Contributing
 
-## Legal Disclaimer
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-This bot is for educational purposes only. Use of automation tools may be against LinkedIn's terms of service. Use at your own risk.
+## ⚖️ License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## ⚠️ Disclaimer
 
-If you encounter any issues or have questions, please:
-1. Check the existing issues on GitHub
-2. Create a new issue with a detailed description and steps to reproduce
-
-## Acknowledgments
-
-- Selenium WebDriver team
-- FuzzyWuzzy for string matching
-- All contributors to this project
+This bot is for educational purposes only. Use of automated tools may be against LinkedIn's terms of service. Use at your own risk and responsibility.
