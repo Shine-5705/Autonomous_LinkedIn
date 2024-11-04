@@ -1387,8 +1387,8 @@ ${JSON.stringify(this.resumeData, null, 2)}`;
 // Example usage
 (async () => {
     const config = {
-        username: "shine.2226cse1184@kiet.edu",
-        password: "Cuby@354",
+        username: "email",
+        password: "pass",
         resumeData: {
             "first name": "Shine",
             "last name": "Gupta",
